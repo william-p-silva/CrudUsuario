@@ -17,7 +17,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/get")
-    public List<Usuario> listar(){
+    public List<ResponseUsuario> listar(){
         return usuarioService.listar();
     }
 

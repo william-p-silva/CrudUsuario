@@ -14,8 +14,13 @@ public class UsuarioService {
         this.repository = repository;
     }
 
-    public List<Usuario> listar() {
-        return repository.findAll();
+    public List<ResponseUsuario> listar() {
+        return repository.findAll().stream().map(x -> new ResponseUsuario(
+                x.getid(),
+                x.getName(),
+                x.getEmail(),
+                x.getActive()
+        )).toList();
     }
 
     public ResponseUsuario create(RequestRegisterUser request) {
