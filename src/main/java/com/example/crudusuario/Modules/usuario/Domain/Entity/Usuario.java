@@ -58,4 +58,12 @@ public class Usuario {
     public boolean getActive(){
         return this.active;
     }
+
+
+    public void updateName(String newName){
+        if (newName == null || newName.isBlank())
+            throw new IllegalArgumentException("O novo nome não pode ser vazio.");
+
+        this.name = newName;
+    }
 }
