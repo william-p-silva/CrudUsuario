@@ -1,7 +1,9 @@
-package com.example.crudusuario.usuario;
+package com.example.crudusuario.Modules.usuario;
 
-import com.example.crudusuario.usuario.DTO.RequestRegisterUser;
-import com.example.crudusuario.usuario.DTO.ResponseUsuario;
+import com.example.crudusuario.Modules.usuario.Presentation.Requests.RequestRegisterUser;
+import com.example.crudusuario.Modules.usuario.Application.DTOs.ResponseUsuario;
+import com.example.crudusuario.Modules.usuario.Domain.Entity.Usuario;
+import com.example.crudusuario.Modules.usuario.Infrastructure.Repositorys.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.crudusuario.usuario;
+package com.example.crudusuario.Modules.usuario.Domain.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.example.crudusuario.usuario.DTO;
+package com.example.crudusuario.Modules.usuario.Application.DTOs;
 
 import java.util.UUID;
 
