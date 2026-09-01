@@ -71,5 +71,7 @@ public class Usuario {
     public void updateEmail(String newEmail){
         if (newEmail == null || newEmail.isBlank())
             throw new ValidationException("O novo email não pode ser vazio.");
+
+        email = newEmail;
     }
 }

@@ -9,6 +9,8 @@ import crudusuario.Shared.Exceptions.NotFoundException;
 import crudusuario.Shared.Exceptions.ValidationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UpdateUserUseCase {
 
@@ -20,8 +22,7 @@ public class UpdateUserUseCase {
         this.passwordService = passwordService;
     }
 
-
-    public ResponseUsuario executeAsync(RequestUpdateUser request){
+    public ResponseUsuario executeAsync(RequestUpdateUser request) {
         Usuario user = usuarioRepository.findByEmail(request.email())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado."));
 
@@ -31,13 +32,24 @@ public class UpdateUserUseCase {
             throw new ValidationException("Senha incorreta.");
 
         request.newName().ifPresent(user::updateName);
-        request.newEmail().ifPresent(user::updateEmail);
+
+        if (request.newEmail().isPresent()) {
+            Optional<Usuario> newEmailUserExist = usuarioRepository
+                    .findByEmail(request.newEmail().get());
+
+            if (newEmailUserExist.isPresent())
+                throw new ValidationException("Já existe um usuário com este email cadastrado.");
+
+            request.newEmail().ifPresent(user::updateEmail);
+        }
+
+        Usuario userSaved = usuarioRepository.save(user);
 
         return new ResponseUsuario(
-                user.getId(),
-                user.getName(),
-                user.getEmail(),
-                user.getActive()
+                userSaved.getId(),
+                userSaved.getName(),
+                userSaved.getEmail(),
+                userSaved.getActive()
         );
     }
 }
